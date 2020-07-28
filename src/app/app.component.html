@@ -1,0 +1,61 @@
+<div [ngClass]= "SelectedTheme">
+    <div  id="containerDiv" class="container-fluid" [style.display]="this.isModelVisible ? 'block' : 'none'"  [ngStyle]= "toogle?minimize:maximize">
+        <!--Toolbar-->
+        <mat-toolbar color="primary" class="head2" style="min-height: 35px !important; height: 35px !important;">
+            <mat-toolbar-row>
+                <span>Ask Ssmith...</span>
+                <span class="example-spacer"></span>
+                <button mat-icon-button [matMenuTriggerFor]="appMenu" matTooltip="Menu" matTooltipClass="TooltipSpec">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M86,10.32c-11.35469,0 -20.64,9.28531 -20.64,20.64c0,11.35469 9.28531,20.64 20.64,20.64c11.35469,0 20.64,-9.28531 20.64,-20.64c0,-11.35469 -9.28531,-20.64 -20.64,-20.64zM86,65.36c-11.35469,0 -20.64,9.28531 -20.64,20.64c0,11.35469 9.28531,20.64 20.64,20.64c11.35469,0 20.64,-9.28531 20.64,-20.64c0,-11.35469 -9.28531,-20.64 -20.64,-20.64zM86,120.4c-11.35469,0 -20.64,9.28531 -20.64,20.64c0,11.35469 9.28531,20.64 20.64,20.64c11.35469,0 20.64,-9.28531 20.64,-20.64c0,-11.35469 -9.28531,-20.64 -20.64,-20.64z"></path></g></g></svg>
+                </button>
+
+                <mat-menu #appMenu="matMenu" color="primary">
+                    <button mat-menu-item [matMenuTriggerFor]="subMenu">Converge</button>
+                    <button mat-menu-item [matMenuTriggerFor]="subMenuISAFE">ISAFE</button>
+                    <button mat-menu-item [matMenuTriggerFor]="subException">Risk Exception</button>
+                </mat-menu>
+
+                <mat-menu #subMenu="matMenu">
+                    <a href="https://converge/" target="_blank" mat-menu-item>Internal</a>
+                    <a href="https://converge.slk-soft.com" target="_blank" mat-menu-item>External</a>
+                </mat-menu>
+
+                <mat-menu #subMenuISAFE="matMenu">
+                    <a href="https://converge/ISafe/" target="_blank" mat-menu-item>Internal</a>
+                    <a href="https://converge.slk-soft.com/ISafe/" target="_blank" mat-menu-item>External</a>
+                </mat-menu>
+
+                <mat-menu #subException="matMenu">
+                    <a href="https://converge/RiskException/MY_Requests.aspx" target="_blank" mat-menu-item>Internal</a>
+                    <a href="https://converge.slk-soft.com/RiskException/MY_Requests.aspx" target="_blank" mat-menu-item>External</a>
+                </mat-menu>
+
+                <button mat-icon-button (click)="onMinFun()" matTooltip="Minimize" matTooltipClass="TooltipSpec">
+                    <i class="fa fa-window-minimize" aria-hidden="true"></i>
+                </button>
+
+                <button mat-icon-button (click)="onClose($event)" matTooltip="Refresh" matTooltipClass="TooltipSpec">
+                    <i class="fa fa-refresh" aria-hidden="true" style="font-size: 18px;"></i>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <!--Header with image and proverb-->
+        <mat-card class="chat_header col-lg-6 col-md-6 col-sm-12 col-xs-12 align-items-center" color="accent">
+            <img mat-card-image id="Ssmith_Image" src="../assets/smith.jpg" alt="image" />
+            <div id="titletext" style="font-size: medium;"><b>IsecAdage:</b></div>
+            <!--https://121.244.210.244:8443/ercchatbotapi/api/proverb-->
+            <iframe id="myIframe" src="https://webapigetproverb.azurewebsites.net/api/getproverb" style="position: absolute; width: 75%; height: 100px; border-style: hidden; margin-left: 18%; margin-top: 8%;"></iframe>
+        </mat-card>
+
+        <!--Web chat container-->
+        <mat-card id="webchat" role="main" class="chat_body col-lg-6 col-md-6 col-sm-12 col-xs-12"></mat-card>
+
+    </div>
+</div>
+
+<!--Extra button to get minimize functionality-->
+<button mat-icon-button class="chat_btn" (click)="onMinFun()" *ngIf="this.isMinButtonVisible" color="primary" style="min-height: 100px !important; width: 100px !important;" matTooltip="Maximize" matTooltipClass="TooltipSpec" matTooltipPosition="above">
+    <i class="fa fa-comments" aria-hidden="false" style='font-size:80px;'></i>
+</button>
+
